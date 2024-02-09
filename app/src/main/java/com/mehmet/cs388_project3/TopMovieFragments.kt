@@ -16,9 +16,8 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
-import org.json.JSONObject
 
-private const val API_KEY = "UGRp35FQyTR5cjmMLj6YRdUC6elqZKJH"
+private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
 class TopMovieFragment : Fragment(), OnListFragmentInteractionListener {
 
@@ -47,10 +46,13 @@ class TopMovieFragment : Fragment(), OnListFragmentInteractionListener {
 
         // Create and set up an AsyncHTTPClient() here
         val client = AsyncHttpClient()
+        val params = RequestParams()
+        params["api_key"] = API_KEY
 
         // Using the client, perform the HTTP request
         client.get(
-            "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+            "https://api.themoviedb.org/3/movie/now_playing",
+            params,
             object : JsonHttpResponseHandler() {
                 /*
                  * The onSuccess function gets called when
@@ -61,7 +63,6 @@ class TopMovieFragment : Fragment(), OnListFragmentInteractionListener {
                     headers: Headers,
                     json: JsonHttpResponseHandler.JSON
                 ) {
-                    // The wait for a response is over
                     progressBar.hide()
 
                     // Parse JSON into Models
